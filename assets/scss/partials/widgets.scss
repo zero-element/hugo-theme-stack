@@ -1,66 +1,120 @@
 .widget {
     .widget-icon {
-        svg {
-            width: 32px;
-            height: 32px;
-            stroke-width: 1.6;
-            color: var(--body-text-color);
-        }
+      svg {
+        width: 32px;
+        height: 32px;
+        stroke-width: 1.6;
+        color: var(--body-text-color);
+      }
     }
-}
-
-/* Tag cloud widget */
-.tagCloud {
+  }
+  
+  /* Tag cloud widget */
+  .tagCloud {
     .tagCloud-tags {
-        display: flex;
-        flex-wrap: wrap;
-
-        a {
-            background: var(--card-background);
-            box-shadow: var(--shadow-l1);
-            border-radius: var(--tag-border-radius);
-            padding: 8px 20px;
-
-            color: var(--card-text-color-main);
-            margin-bottom: 10px;
-            margin-right: 5px;
-            font-size: 1.4rem;
-            transition: box-shadow 0.3s ease;
-
-            &:hover {
-                box-shadow: var(--shadow-l2);
-            }
-        }
-    }
-}
-
-/* Archives widget */
-.widget.archives {
-    .widget-archive--list {
-        border-radius: var(--card-border-radius);
+      display: flex;
+      flex-wrap: wrap;
+  
+      a {
+        background: var(--card-background);
         box-shadow: var(--shadow-l1);
-        background-color: var(--card-background);
+        border-radius: var(--tag-border-radius);
+        padding: 8px 20px;
+  
+        color: var(--card-text-color-main);
+        margin-bottom: 10px;
+        margin-right: 5px;
+        font-size: 1.4rem;
+        transition: box-shadow 0.3s ease;
+  
+        &:hover {
+          box-shadow: var(--shadow-l2);
+        }
+      }
     }
-
+  }
+  
+  /* Archives widget */
+  .widget.archives {
+    .widget-archive--list {
+      border-radius: var(--card-border-radius);
+      box-shadow: var(--shadow-l1);
+      background-color: var(--card-background);
+    }
+  
     .archives-year {
-        &:not(:last-of-type) {
-            border-bottom: 1.5px solid var(--card-separator-color);
+      &:not(:last-of-type) {
+        border-bottom: 1.5px solid var(--card-separator-color);
+      }
+  
+      a {
+        font-size: 1.4rem;
+        padding: 18px 25px;
+        display: flex;
+  
+        span.year {
+          flex: 1;
+          color: var(--card-text-color-main);
+          font-weight: bold;
         }
-
-        a {
-            font-size: 1.4rem;
-            padding: 18px 25px;
-            display: flex;
-
-            span.year {
-                flex: 1;
-                color: var(--card-text-color-main);
-                font-weight: bold;
-            }
-
-            span.count {
-                color: var(--card-text-color-tertiary);
-            }
+  
+        span.count {
+          color: var(--card-text-color-tertiary);
         }
+      }
     }
-}
+  }
+  
+  /* ToC widget */
+  .post-toc {
+    .widget-topic--list {
+      font-size: 1.4rem;
+      border-radius: var(--card-border-radius);
+      box-shadow: var(--shadow-l1);
+      background-color: var(--card-background);
+      padding: 0.2em 0.5em;
+  
+      ul {
+        padding-left: 0.8em;
+        list-style-type: disc;
+      }
+  
+      a {
+        padding: 0.4em 1em;
+        display: flex;
+      }
+  
+      @each $layer in 1 2 3 {
+        .toc-h#{$layer} a {
+          font-weight: 800 - ($layer * 100);
+          font-size: (1.2em - $layer / 10);
+        }
+      }
+  
+      ul {
+        display: none;
+  
+        &.has-active {
+          display: block;
+          > ul {
+              display: block;
+          }
+        }
+  
+        &.always-active {
+          display: block;
+          > ul {
+              display: block;
+          }
+        }
+      }
+  
+      .toc-link {
+        color: var(--card-text-color-main);
+        &.active {
+          color: rgba(255, 174, 0, 0.788);
+        }
+      }
+    }
+  }
+  

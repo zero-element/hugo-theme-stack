@@ -1,8 +1,14 @@
 {{ if .Site.Params.widgets.enabled }}
     {{ $context := . }}
     <aside class="sidebar right-sidebar sticky">
-        {{ range $widget := .Site.Params.widgets.enabled }}
-            {{ partial (printf "widget/%s" $widget) $context }}
-        {{ end }}
+    {{ if not .IsPage }}
+            {{ range $widget := .Site.Params.widgets.enabled }}
+                {{ if ne $widget "topic" }}
+                    {{ partial (printf "widget/%s" $widget) $context }}
+                {{ end }}
+            {{ end }}
+    {{ else if in .Site.Params.widgets.enabled "topic"}}
+        {{ partial (printf "widget/topic") $context }}
+    {{ end }}
     </aside>
 {{ end }}

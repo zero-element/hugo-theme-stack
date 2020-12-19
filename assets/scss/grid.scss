@@ -15,19 +15,20 @@
             max-width: 972px;
 
             .right-sidebar {
-                width: 25%;
+                // display: none;
+                width: 15%;
             }
         }
 
         @media (min-width: $on-desktop) {
-            max-width: 1200px;
+            max-width: 1400px;
 
             .left-sidebar {
                 width: 20%;
             }
 
             .right-sidebar {
-                width: 25%;
+                width: 20%;
             }
         }
 

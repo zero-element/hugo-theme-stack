@@ -10,6 +10,7 @@ import { createGallery } from "./gallery"
 import { getColor } from './color';
 import menu from './menu';
 import createElement from './createElement';
+import Toc from './toc';
 
 let Stack = {
     init: () => {
@@ -17,6 +18,7 @@ let Stack = {
          * Bind menu event
          */
         menu();
+        Toc.toc();
 
         if (document.querySelector('.article-content')) {
             createGallery('.article-content');
