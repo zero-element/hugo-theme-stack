@@ -25,7 +25,7 @@
                         <!-- generate li array of the proper depth -->
                         {{ if lt $curHeading $nextHeading }}
                             {{ range seq (add $curHeading 1) $nextHeading }}
-                                <ul class="toc-h{{ . }}{{ if eq $nextHeading $baseHeading }}{{ " always-active" }}{{ end }}">
+                                <ul class="toc-h{{ . }}{{ if eq . $baseHeading }}{{ " always-active" }}{{ end }}">
                             {{end}}
                         {{ else if gt $curHeading $nextHeading }}
                             {{ range seq (add $nextHeading 1) $curHeading }}
