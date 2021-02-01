@@ -4,4 +4,3 @@
 {{- $opts := dict "minify" hugo.IsProduction -}}
 {{- $script := resources.Get "ts/main.ts" | js.Build $opts -}}
 <script type="text/javascript" src="{{ $script.RelPermalink }}" defer></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>

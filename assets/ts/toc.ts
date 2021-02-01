@@ -1,41 +1,44 @@
-'use strict';
+function getAbsTop(element: HTMLElement): number {
+  var actualTop = element.offsetTop;
+  var current = element.offsetParent as HTMLElement;
+  while (current !== null) {
+    actualTop += (current.offsetTop + current.clientTop);
+    current = current.offsetParent as HTMLElement;
+  }
+  return actualTop
+}
 
 let initToc = function () {
-  const HEADERFIX = 30;
-  const $toclink = $('.toc-link');
-  const $headerlink = $(".article-content").children('h1,h2,h3');
-  const $tocLinkLis = $('.widget-topic--list ul');
+  const toclink = document.querySelectorAll('.toc-link');
+  const headerlink = document.querySelectorAll('.article-content > h1, .article-content > h2, .article-content > h3');
+  const tocLinkLis = document.querySelectorAll('.widget-topic--list ul');
 
-  const headerlinkTop = $.map($headerlink, function (link: HTMLElement) {
-    return $(link).offset().top;
-  });
-
-  const headerLinksOffsetForSearch = $.map(headerlinkTop, function (offset) {
-    return offset - HEADERFIX;
+  const headerlinkTop = Array.prototype.map.call(headerlink, function (link: HTMLElement) {
+    return getAbsTop(link);
   });
 
   const searchActiveTocIndex = function (array, target) {
     for (let i = 0; i < array.length - 1; i++) {
-      if (target > array[i] && target <= array[i + 1]) return i;
+      if (target > array[i] && target <= array[i + 1]){console.log(array[i], target); return i};
     }
     if (target > array[array.length - 1]) return array.length - 1;
     return -1;
   };
 
-  $(window).on('scroll', function () {
-    const scrollTop = $(window).scrollTop();
-    const activeTocIndex = searchActiveTocIndex(headerLinksOffsetForSearch, scrollTop);
+  window.addEventListener('scroll', function () {
+    const scrollTop = document.documentElement.scrollTop
+    const activeTocIndex = searchActiveTocIndex(headerlinkTop, scrollTop);
 
-    $($toclink).removeClass('active');
-    $($tocLinkLis).removeClass('has-active');
+    toclink.forEach((link) => link.classList.remove('active'));
+    tocLinkLis.forEach((link) => link.classList.remove('has-active'));
 
-    if (activeTocIndex !== -1 && $toclink[activeTocIndex] != null) {
-      $($toclink[activeTocIndex]).addClass('active');
+    if (activeTocIndex !== -1 && toclink[activeTocIndex] != null) {
+      toclink[activeTocIndex].classList.add('active');
 
-      let ancestor = $toclink[activeTocIndex].parentNode;
+      let ancestor = toclink[activeTocIndex].parentNode as HTMLElement;
       while (ancestor.tagName !== 'DIV') {
-        $(ancestor).addClass('has-active');
-        ancestor = ancestor.parentNode;
+        ancestor.classList.add('has-active');
+        ancestor = ancestor.parentNode as HTMLElement;
       }
     }
   });
@@ -53,4 +56,3 @@ export default function () {
     }
   }
 };
-

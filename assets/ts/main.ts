@@ -17,8 +17,8 @@ let Stack = {
         /**
          * Bind menu event
          */
-        menu();
         toc();
+        menu();
 
         if (document.querySelector('.article-content')) {
             createGallery('.article-content');
